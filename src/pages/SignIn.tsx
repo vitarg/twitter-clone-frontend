@@ -13,11 +13,13 @@ const Wrapper = styled("div")(({ theme }) => ({
 }));
 
 const BlueSide = styled("div")(({ theme }) => ({
-  backgroundColor: "#1DA1F2",
+  backgroundColor: "#62c6ff",
   flex: "0 0 50%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  position: "relative",
+  overflow: "hidden",
 }));
 
 const LoginSide = styled("div")(({ theme }) => ({
@@ -36,6 +38,21 @@ const LoginSideWrapper = styled("div")(({ theme }) => ({
   maxWidth: 380,
 }));
 
+const SearchIcon = styled(Search)(({ theme }) => ({
+  fontSize: 36,
+  marginRight: 16,
+}));
+
+const PeopleOutlineIcon = styled(PeopleOutline)(({ theme }) => ({
+  fontSize: 36,
+  marginRight: 16,
+}));
+
+const ModeCommentOutlinedIcon = styled(ModeCommentOutlined)(({ theme }) => ({
+  fontSize: 36,
+  marginRight: 16,
+}));
+
 const LoginSideTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: 32,
@@ -48,6 +65,7 @@ const BlueSideListInfo = styled("ul")(({ theme }) => ({
   padding: 0,
   margin: 0,
   maxWidth: 380,
+  position: "relative",
   "& h6": {
     display: "flex",
     alignItems: "center",
@@ -56,29 +74,42 @@ const BlueSideListInfo = styled("ul")(({ theme }) => ({
   },
 }));
 
+const BlueSideListItem = styled("li")(({ theme }) => ({
+  marginBottom: 40,
+}));
+
+const BlueSideTwitterIcon = styled(Twitter)(({ theme }) => ({
+  position: "absolute",
+  left: "-100%",
+  top: "-100%",
+  height: "300%",
+  width: "300%",
+}));
+
 const SignIn: React.FC = () => {
   return (
     <Wrapper>
       <BlueSide>
+        <BlueSideTwitterIcon color={"primary"} />
         <BlueSideListInfo>
-          <li>
+          <BlueSideListItem>
             <Typography variant={"h6"}>
-              <Search />
+              <SearchIcon />
               Читайте о том, что вам интересно.
             </Typography>
-          </li>
-          <li>
+          </BlueSideListItem>
+          <BlueSideListItem>
             <Typography variant={"h6"}>
-              <PeopleOutline />
+              <PeopleOutlineIcon />
               Узнайте, о чем говорят в мире.
             </Typography>
-          </li>
-          <li>
+          </BlueSideListItem>
+          <BlueSideListItem>
             <Typography variant={"h6"}>
-              <ModeCommentOutlined />
+              <ModeCommentOutlinedIcon />
               Присоединяйтесь к общению.
             </Typography>
-          </li>
+          </BlueSideListItem>
         </BlueSideListInfo>
       </BlueSide>
       <LoginSide>
