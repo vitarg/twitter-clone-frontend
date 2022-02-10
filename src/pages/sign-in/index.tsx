@@ -20,7 +20,7 @@ import {
   ModeCommentOutlinedIcon,
   PeopleOutlineIcon,
 } from "./styles";
-import DialogSignIn from "../../components/dialog";
+import AuthDialog from "../../components/dialog";
 
 const SignIn: React.FC = () => {
   const [openSignInDialog, setOpenSignInDialog] = useState<boolean>(false);
@@ -98,7 +98,7 @@ const SignIn: React.FC = () => {
             Войти
           </Button>
         </LoginSideWrapper>
-        <DialogSignIn
+        <AuthDialog
           open={openSignInDialog}
           title={"Войти в аккаунт"}
           onClose={() => handleClose("sign-in")}
@@ -138,7 +138,59 @@ const SignIn: React.FC = () => {
               Войти
             </Button>
           </FormControl>
-        </DialogSignIn>
+        </AuthDialog>
+        <AuthDialog
+          open={openSignUpDialog}
+          title={"Зарегистрироваться"}
+          onClose={() => handleClose("sign-up")}
+        >
+          <FormControl component={"fieldset"} fullWidth>
+            <FormGroup aria-label={"position"} row>
+              <TextField
+                autoFocus
+                variant={"filled"}
+                id={"name"}
+                label={"Имя"}
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                style={{ marginBottom: 24 }}
+              />
+              <TextField
+                autoFocus
+                variant={"filled"}
+                id={"email"}
+                label={"E-mail"}
+                type={"email"}
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                style={{ marginBottom: 24 }}
+              />
+              <TextField
+                autoFocus
+                variant={"filled"}
+                id={"password"}
+                label={"Пароль"}
+                type={"password"}
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                style={{ marginBottom: 36 }}
+              />
+            </FormGroup>
+            <Button
+              onClick={() => handleClose("sign-up")}
+              variant={"contained"}
+              fullWidth
+            >
+              Зарегистрироваться
+            </Button>
+          </FormControl>
+        </AuthDialog>
       </LoginSide>
     </Wrapper>
   );

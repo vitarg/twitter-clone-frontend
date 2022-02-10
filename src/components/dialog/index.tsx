@@ -17,7 +17,7 @@ interface DialogSingInProps {
   onClose: () => void;
 }
 
-const DialogSignIn: React.FC<DialogSingInProps> = ({
+const AuthDialog: React.FC<DialogSingInProps> = ({
   title,
   children,
   open,
@@ -36,4 +36,4 @@ const DialogSignIn: React.FC<DialogSingInProps> = ({
   );
 };
 
-export default DialogSignIn;
+export default AuthDialog;
