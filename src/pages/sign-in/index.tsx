@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import {
   Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
   FormControl,
   FormGroup,
-  IconButton,
   TextField,
   Typography,
 } from "@mui/material";
@@ -24,19 +20,31 @@ import {
   ModeCommentOutlinedIcon,
   PeopleOutlineIcon,
 } from "./styles";
-import CloseIcon from "@mui/icons-material/Close";
+import DialogSignIn from "../../components/dialog";
 
 const SignIn: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [openSignInDialog, setOpenSignInDialog] = useState<boolean>(false);
+  const [openSignUpDialog, setOpenSignUpDialog] = useState<boolean>(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen = (type: string) => {
+    if (type === "sign-in") {
+      setOpenSignInDialog(true);
+    }
+
+    if (type === "sign-up") {
+      setOpenSignUpDialog(true);
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = (type: string) => {
+    if (type === "sign-in") {
+      setOpenSignInDialog(false);
+    }
 
+    if (type === "sign-up") {
+      setOpenSignUpDialog(false);
+    }
+  };
   return (
     <Wrapper>
       <BlueSide>
@@ -73,6 +81,7 @@ const SignIn: React.FC = () => {
           </Typography>
           <br />
           <Button
+            onClick={() => handleClickOpen("sign-up")}
             variant={"contained"}
             color={"primary"}
             fullWidth
@@ -81,60 +90,55 @@ const SignIn: React.FC = () => {
             Зарегистрироваться
           </Button>
           <Button
-            onClick={handleClickOpen}
+            onClick={() => handleClickOpen("sign-in")}
             variant={"outlined"}
             color={"primary"}
             fullWidth
           >
             Войти
           </Button>
-
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle id={"from-dialog-title"}>
-              <IconButton
-                onClick={handleClose}
-                color={"secondary"}
-                aria-label={"close"}
-              >
-                <CloseIcon style={{ fontSize: 26 }} color={"primary"} />
-              </IconButton>
-              Войти в Твиттер
-            </DialogTitle>
-            <DialogContent>
-              <FormControl component={"fieldset"} fullWidth>
-                <FormGroup aria-label={"position"} row>
-                  <TextField
-                    autoFocus
-                    variant={"filled"}
-                    id={"email"}
-                    label={"E-mail"}
-                    type={"email"}
-                    fullWidth
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    style={{ marginBottom: 18 }}
-                  />
-                  <TextField
-                    autoFocus
-                    variant={"filled"}
-                    id={"password"}
-                    label={"Пароль"}
-                    type={"password"}
-                    fullWidth
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    style={{ marginBottom: 18 }}
-                  />
-                </FormGroup>
-                <Button onClick={handleClose} variant={"contained"} fullWidth>
-                  Войти
-                </Button>
-              </FormControl>
-            </DialogContent>
-          </Dialog>
         </LoginSideWrapper>
+        <DialogSignIn
+          open={openSignInDialog}
+          title={"Войти в аккаунт"}
+          onClose={() => handleClose("sign-in")}
+        >
+          <FormControl component={"fieldset"} fullWidth>
+            <FormGroup aria-label={"position"} row>
+              <TextField
+                autoFocus
+                variant={"filled"}
+                id={"email"}
+                label={"E-mail"}
+                type={"email"}
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                style={{ marginBottom: 18 }}
+              />
+              <TextField
+                autoFocus
+                variant={"filled"}
+                id={"password"}
+                label={"Пароль"}
+                type={"password"}
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                style={{ marginBottom: 18 }}
+              />
+            </FormGroup>
+            <Button
+              onClick={() => handleClose("sign-in")}
+              variant={"contained"}
+              fullWidth
+            >
+              Войти
+            </Button>
+          </FormControl>
+        </DialogSignIn>
       </LoginSide>
     </Wrapper>
   );
